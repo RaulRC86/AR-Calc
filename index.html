@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <title>AR-Calc 🧮🤖</title>
-    <!-- Update to latest versions -->
+
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <link rel="stylesheet" href="./assets/css/style.css" />
@@ -14,7 +14,7 @@
         overflow: hidden;
       }
 
-      /* Make the calculator visible for debugging */
+   
       #calculator {
         position: fixed;
         top: 50%;
@@ -28,7 +28,7 @@
         display: block !important;
       }
 
-      /* Hide calculator in AR mode if needed */
+
       .a-fullscreen #calculator {
         display: none !important;
       }
@@ -42,7 +42,7 @@
       vr-mode-ui="enabled: false"
     >
       <a-marker preset="hiro">
-        <!-- Use a simple plane with a custom component instead of HTML shader -->
+
         <a-plane
           position="0 0 0"
           rotation="-90 0 0"
@@ -57,7 +57,7 @@
       <a-entity camera></a-entity>
     </a-scene>
 
-    <!-- Your calculator -->
+
     <div id="calculator">
       <input id="display" readonly />
       <div id="keys">
@@ -81,22 +81,22 @@
       </div>
     </div>
 
-    <!-- Add this script before your main JS -->
+
     <script>
-      // Custom A-Frame component to sync calculator state with AR
+  
       AFRAME.registerComponent("ar-calculator", {
         init: function () {
           this.el.addEventListener("click", function (evt) {
-            // Handle clicks on the AR plane
+
             const display = document.querySelector("#display");
-            calculate(); // Calculate result when AR plane is clicked
+            calculate(); 
           });
         },
         tick: function () {
-          // You could update the appearance of the plane based on calculator state
+
           const display = document.querySelector("#display");
           if (display.value && display.value !== "Error") {
-            // Maybe change color based on positive/negative result
+
             const value = parseFloat(display.value);
             if (!isNaN(value)) {
               if (value > 0) this.el.setAttribute("color", "#e0ffe0");
