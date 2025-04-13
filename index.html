@@ -8,23 +8,26 @@
     <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <style>
-      body, html { margin: 0; overflow: hidden; }
-      
+      body,
+      html {
+        margin: 0;
+        overflow: hidden;
+      }
+
       /* Make the calculator visible for debugging */
       #calculator {
         position: fixed;
-        bottom: 10px;
-        right: 10px;
-        z-index: 999;
-        transform: scale(0.4);
-        transform-origin:center center;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(0.4);
+        transform-origin: center center;
         background: white;
         padding: 10px;
         border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0,0,0,0.5);
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
         display: block !important;
       }
-      
+
       /* Hide calculator in AR mode if needed */
       .a-fullscreen #calculator {
         display: none !important;
@@ -40,13 +43,14 @@
     >
       <a-marker preset="hiro">
         <!-- Use a simple plane with a custom component instead of HTML shader -->
-        <a-plane 
-          position="0 0 0" 
-          rotation="-90 0 0" 
-          width="2" 
-          height="2" 
+        <a-plane
+          position="0 0 0"
+          rotation="-90 0 0"
+          width="2"
+          height="2"
           color="#f0f0f0"
-          ar-calculator>
+          ar-calculator
+        >
         </a-plane>
       </a-marker>
 
@@ -80,27 +84,27 @@
     <!-- Add this script before your main JS -->
     <script>
       // Custom A-Frame component to sync calculator state with AR
-      AFRAME.registerComponent('ar-calculator', {
-        init: function() {
-          this.el.addEventListener('click', function(evt) {
+      AFRAME.registerComponent("ar-calculator", {
+        init: function () {
+          this.el.addEventListener("click", function (evt) {
             // Handle clicks on the AR plane
-            const display = document.querySelector('#display');
+            const display = document.querySelector("#display");
             calculate(); // Calculate result when AR plane is clicked
           });
         },
-        tick: function() {
+        tick: function () {
           // You could update the appearance of the plane based on calculator state
-          const display = document.querySelector('#display');
+          const display = document.querySelector("#display");
           if (display.value && display.value !== "Error") {
             // Maybe change color based on positive/negative result
             const value = parseFloat(display.value);
             if (!isNaN(value)) {
-              if (value > 0) this.el.setAttribute('color', '#e0ffe0');
-              else if (value < 0) this.el.setAttribute('color', '#ffe0e0');
-              else this.el.setAttribute('color', '#f0f0f0');
+              if (value > 0) this.el.setAttribute("color", "#e0ffe0");
+              else if (value < 0) this.el.setAttribute("color", "#ffe0e0");
+              else this.el.setAttribute("color", "#f0f0f0");
             }
           }
-        }
+        },
       });
     </script>
 
